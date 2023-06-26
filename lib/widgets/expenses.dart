@@ -26,12 +26,22 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void displaySaveExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context,
-        builder: (ctx) {
-          return const NewExpense();
-        });
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) {
+        return NewExpense(
+          onPressedSaveExpense: displaySaveExpense,
+        );
+      },
+    );
   }
 
   @override

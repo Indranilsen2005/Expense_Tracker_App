@@ -7,7 +7,7 @@ var kColorScheme = ColorScheme.fromSeed(
 
 var kDarkColorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
-  seedColor: const Color.fromARGB(255, 2, 36, 91),
+  seedColor: const Color.fromARGB(255, 7, 1, 166),
 );
 
 void main() {
@@ -29,8 +29,8 @@ void main() {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: kDarkColorScheme.primary,
-            foregroundColor: kDarkColorScheme.secondaryContainer,
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
           ),
         ),
       ),

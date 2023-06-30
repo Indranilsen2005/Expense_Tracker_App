@@ -2,6 +2,7 @@ import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -68,6 +69,36 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'No Expenses found. Add a new expense',
+            style: GoogleFonts.lato(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+            onPressed: _openAddExpenseOverlay,
+            icon: const Icon(Icons.add),
+            label: const Text('Add Expense'),
+          ),
+        ],
+      ),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expense Tracker'),
@@ -82,10 +113,7 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text('Chart of expenses'),
           Expanded(
-            child: ExpensesList(
-              expenses: _registeredExpenses,
-              onRemoveExpense: removeExpense,
-            ),
+            child: mainContent,
           ),
         ],
       ),
